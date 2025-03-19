@@ -112,5 +112,10 @@
             }
             return true;
         }
+
+        public int BoardLength()
+        {
+            return BoardDimensions.Item1;
+        }
     }
 }

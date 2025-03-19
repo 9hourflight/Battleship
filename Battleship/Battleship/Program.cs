@@ -5,7 +5,7 @@
         static void Main()
         {
             BasePlayer player = new BasePlayer();
-            BasePlayer ai = new BasePlayer();
+            BasePlayer ai = new AIPlayer();
             Grid aiGrid = ai.GetGrid();
             Grid playerGrid = player.GetGrid();
             int shots = 0;

@@ -2,6 +2,8 @@
 {
     class BasePlayer
     {
+        public static string[] shipNames = { "Battleship", "Carrier", "Cruiser", "Submarine", "Destroyer" };
+        public static int[] shipLengths = { 5, 4, 3, 3, 2 };
         private Grid grid;
         private Random rand;
 
@@ -18,21 +20,44 @@
             int x = 5;
             int y = 5;
 
-            string direction = "H";
-            if (rand.Next(0, 2) == 0)
+            
+            for (int i = 0; i < shipNames.Length; i++)
             {
-                direction = "V";
+                string direction = "H";
+                if (rand.Next(0, 2) == 0)
+                {
+                    direction = "V";
+                }
+
+                if(!grid.PlaceShip(new Ship(shipNames[i], shipLengths[i]), rand.Next(grid.BoardLength()), rand.Next(grid.BoardLength()), direction))
+                {
+                    i--;
+                }
             }
             
-            grid.PlaceShip(new Ship("Battleship", 4), x, y, direction);
         }
 
-        public bool Attack(Grid enemyGrid)
+        public virtual bool Attack(Grid enemyGrid)
         {
             int x, y;
+            string? xInput;
+            string? yInput;
             do
             {
-                x = rand.Next(10);
+                Console.WriteLine("Enter x-coordinate of where you would like to fire a shot");
+                xInput = Console.ReadLine();
+                if(int.TryParse(xInput, out int xCoord))
+                {
+                    if(xCoord <= 0 && xCoord >= 10)
+                    {
+                        x = xCoord;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                    //figure out how to get attack to prompt again
+                }
                 y = rand.Next(10);
             }
             while (enemyGrid.MakeGuess(x, y));
