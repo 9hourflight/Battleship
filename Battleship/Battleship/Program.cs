@@ -18,12 +18,14 @@
                 Console.Clear();
                 Console.WriteLine("AI's Board (Shots Fired):");
                 aiGrid.DisplayBoard(false);
+                player.Attack(aiGrid);
 
                 Console.WriteLine("\nYour Board:");
                 playerGrid.DisplayBoard(false);
-                Console.WriteLine("Enter to fire random shots");
-                Console.ReadLine();
-                player.Attack(aiGrid);
+                //Console.WriteLine("Enter to fire a shot");
+                //Console.ReadLine();
+                ai.Attack(playerGrid);
+                
 
                 shots++;
                 if (aiGrid.CheckWin())

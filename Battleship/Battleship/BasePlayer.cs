@@ -1,4 +1,6 @@
-﻿namespace Battleship
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace Battleship
 {
     class BasePlayer
     {
@@ -17,10 +19,7 @@
         public void PlaceShips()
         {
             Random rand = new Random();
-            int x = 5;
-            int y = 5;
-
-            
+         
             for (int i = 0; i < shipNames.Length; i++)
             {
                 string direction = "H";
@@ -36,6 +35,10 @@
             }
             
         }
+        public enum YToLetters
+        {
+            A, B, C, D, E, F, G, H, I, J,
+        }
 
         public virtual bool Attack(Grid enemyGrid)
         {
@@ -44,23 +47,48 @@
             string? yInput;
             do
             {
-                Console.WriteLine("Enter x-coordinate of where you would like to fire a shot");
+                Console.WriteLine("Enter a number for the x-coordinate of where you will fire");
                 xInput = Console.ReadLine();
-                if(int.TryParse(xInput, out int xCoord))
+                if(xInput != null)
                 {
-                    if(xCoord <= 0 && xCoord >= 10)
+                    if (int.TryParse(xInput, out int xCoord) && (xCoord >= 0 && xCoord <= 10))
                     {
                         x = xCoord;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Input error");
+                        break;
+                        
                     }
                 }
                 else
                 {
                     Console.WriteLine("Invalid input");
-                    //figure out how to get attack to prompt again
+                    break;
                 }
-                y = rand.Next(10);
+                Console.WriteLine("Enter the letter of the y-coordinate of where you will fire");
+                
+                yInput = Console.ReadLine();
+                if (yInput != null)
+                {
+                    y = (int)((YToLetters)Enum.Parse(typeof(YToLetters), yInput));
+                    Console.WriteLine(y);
+                    //else
+                    //{
+                    //    Console.WriteLine("Input error");
+                    //    break;
+                    //    //figure out how to get attack to prompt again
+                    //}
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                    break;
+                }
+
             }
-            while (enemyGrid.MakeGuess(x, y));
+            while (enemyGrid.MakeGuess(y, x)); //calling as (x, Y) causes it to place incorrectly for some reason, switching it fixes the problem
             return true;
         }
 

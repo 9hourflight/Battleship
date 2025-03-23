@@ -95,14 +95,6 @@
             return false;
         }
 
-        public bool FireShot(int x , int y)
-        {
-            if (Board[x,y] == 'S')
-            {
-                Board[x, y] = 'X';
-                
-            }
-        }
 
         public bool CheckWin()
         {
