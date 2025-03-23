@@ -58,8 +58,7 @@ namespace Battleship
                     else
                     {
                         Console.WriteLine("Input error");
-                        break;
-                        
+                        break;  
                     }
                 }
                 else
@@ -69,17 +68,11 @@ namespace Battleship
                 }
                 Console.WriteLine("Enter the letter of the y-coordinate of where you will fire");
                 
-                yInput = Console.ReadLine();
+                yInput = Console.ReadLine().ToUpper();
                 if (yInput != null)
                 {
                     y = (int)((YToLetters)Enum.Parse(typeof(YToLetters), yInput));
                     Console.WriteLine(y);
-                    //else
-                    //{
-                    //    Console.WriteLine("Input error");
-                    //    break;
-                    //    //figure out how to get attack to prompt again
-                    //}
                 }
                 else
                 {
