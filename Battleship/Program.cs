@@ -4,15 +4,15 @@
     {
         static void Main()
         {
+            Console.WriteLine("Welcome to Battleship! Press Enter to start.");
+            Console.ReadLine();
             BasePlayer player = new BasePlayer();
             BasePlayer ai = new AIPlayer();
             Grid aiGrid = ai.GetGrid();
             Grid playerGrid = player.GetGrid();
+            playerGrid.DisplayBoard(false);
             int playerShots = 0;
             int aiShots = 0;
-
-            Console.WriteLine("Welcome to Battleship! Press Enter to start.");
-            Console.ReadLine();
 
             while (true)
             {

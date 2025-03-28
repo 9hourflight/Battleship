@@ -45,7 +45,7 @@
             }
         }
 
-        public bool PlaceShip(Ship ship, int startX, int startY, string direction)
+        public bool PlaceShip(Ship ship, int startX, int startY, char direction)
         {
             List<(int, int)> tempCoordinates = new List<(int, int)>();
             for (int i = 0; i < ship.Length; i++)
@@ -53,11 +53,11 @@
                 int x = startX;
                 int y = startY;
 
-                if (direction == "V")
+                if (direction == 'V')
                 {
                     x += i;
                 }
-                if (direction == "H")
+                if (direction == 'H')
                 {
                     y += i;
                 }
